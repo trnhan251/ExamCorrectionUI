@@ -5,7 +5,7 @@ export class AppInfoService {
   constructor() {}
 
   public get title() {
-    return 'ExamCorrectionUI';
+    return 'Exam Correction';
   }
 
   public get currentYear() {
