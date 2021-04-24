@@ -32,3 +32,19 @@
     }
   }
 }
+::ng-deep .row {
+  width: 100%;
+}
+
+::ng-deep h2.content-block {
+  margin: 20px 40px;
+}
+
+::ng-deep mat-form-field {
+  width: 25%;
+  margin-right: 10px;
+}
+
+::ng-deep .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  background-color: #42d79d;
+}

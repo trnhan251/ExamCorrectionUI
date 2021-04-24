@@ -1,7 +1,11 @@
 :host {
-  @import "../themes/generated/variables.base.scss";
-  background-color: darken($base-bg, 5.00);
+  @import "../themes/variables.base.scss";
+  background-color: #f6f7fb;
   display: flex;
   height: 100%;
   width: 100%;
+}
+
+::ng-deep .dx-theme-material-typography .dx-swatch-additional, .dx-theme-material-typography.dx-swatch-additional {
+  background-color: #ffffff;
 }
