@@ -11,6 +11,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
+import {FormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {
@@ -63,7 +64,8 @@ const routes: Routes = [
     MatOptionModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],

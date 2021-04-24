@@ -23,6 +23,15 @@
   height: 22px;
 }
 
+.content-block h1 {
+  font-size: 35px;
+  font-weight: bold;
+
+  span {
+    color: red;
+  }
+}
+
 :host-context(.screen-x-small) .logos-container {
   svg {
     width: 100%;

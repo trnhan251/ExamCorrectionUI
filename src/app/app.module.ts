@@ -8,6 +8,8 @@ import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {PredictionService} from "./shared/services/prediction.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -25,9 +27,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginFormModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [AuthService, ScreenService, AppInfoService],
+  providers: [AuthService, ScreenService, AppInfoService, PredictionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

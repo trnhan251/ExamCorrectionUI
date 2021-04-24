@@ -1,21 +1,28 @@
 <h2 class="content-block">Predict</h2>
 <div class="content-block">
   <div class="dx-card responsive-paddings">
+    <h2>Input</h2>
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>First sentence</mat-label>
-        <textarea matInput></textarea>
+        <textarea [(ngModel)]="predictionRequest.firstSentence" matInput></textarea>
         <mat-hint>Hint</mat-hint>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Second sentence</mat-label>
-        <textarea matInput></textarea>
+        <textarea [(ngModel)]="predictionRequest.secondSentence" matInput></textarea>
         <mat-hint>Hint</mat-hint>
       </mat-form-field>
     </div>
     <div class="row">
-      <button mat-raised-button color="primary">Predict</button>
+      <button mat-raised-button color="primary" (click)="createPredictionEvent()">Predict</button>
     </div>
+  </div>
+</div>
+<div class="content-block">
+  <div class="dx-card responsive-paddings">
+    <h2>Result</h2>
+    <h1>Correctness: <span>{{predictionResult.correctnessPercentage * 100}}%</span></h1>
   </div>
 </div>
