@@ -58,6 +58,12 @@
         width="800"
         [hidingPriority]="8">
       </dxi-column>
+      <dxi-column
+        caption="Score"
+        dataField="score"
+        type="number"
+        [hidingPriority]="8">
+      </dxi-column>
       <dxi-column caption="Actions" type="buttons">
         <dxi-button text="Detail" [onClick]="onDetailStudentSolution"></dxi-button>
         <dxi-button text="Delete" [onClick]="onDeleteStudentSolution"></dxi-button>
@@ -74,7 +80,7 @@
   [closeOnOutsideClick]="false"
   [(visible)]="studentSolutionPopup"
   [width]="600"
-  [height]="600"
+  [height]="700"
   (onHiding)="closePopup()"
 >
   <mat-form-field class="field-lg-width" appearance="outline">
@@ -84,10 +90,19 @@
     </label>
   </mat-form-field>
   <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Score</mat-label>
+    <label>
+      <input [(ngModel)]="currentStudentSolution.score" matInput >
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
     <mat-label>Answer</mat-label>
     <label>
       <textarea [(ngModel)]="currentStudentSolution.answer" [rows]="15" matInput ></textarea>
     </label>
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="onStudentSolutionSave()">Save</button>
+  <div class="student-solution-actions">
+    <button mat-raised-button color="primary" (click)="onStudentSolutionSave()">Save</button>
+    <button mat-raised-button color="warn" (click)="onScoreStudentSolution()">Score</button>
+  </div>
 </dx-popup>

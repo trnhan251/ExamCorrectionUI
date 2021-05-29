@@ -139,3 +139,13 @@ mat-form-field.field-lg-width {
 .mat-raised-button.mat-primary {
   background-color: rgb(66, 215, 157);
 }
+
+.student-solution-actions {
+  width: 100%;
+  text-align: center;
+
+  .mat-raised-button {
+    width: 100px;
+    margin: 0 10px;
+  }
+}

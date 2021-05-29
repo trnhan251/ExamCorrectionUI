@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = {
-      email: 'test@test.de'
+      email: this.authService.getUserName()
     };
   }
 

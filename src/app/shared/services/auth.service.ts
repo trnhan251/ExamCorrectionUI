@@ -126,6 +126,11 @@ export class AuthService {
       this.msalService.loginPopup(b2cPolicies.authorities.editProfile);
     }
   }
+
+  getUserName(): any {
+    const account = this.msalService.getAccount();
+    return account.idToken.emails[0];
+  }
 }
 
 @Injectable()

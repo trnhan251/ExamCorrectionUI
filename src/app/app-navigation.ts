@@ -14,4 +14,9 @@ export const navigation = [
     path: '/exams',
     icon: 'copy'
   },
+  {
+    text: 'Information',
+    path: '#',
+    icon: 'info'
+  },
 ];

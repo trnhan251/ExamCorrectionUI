@@ -36,18 +36,22 @@ const routes: Routes = [
   {
     path: 'courses',
     component: CoursesComponent,
+    canActivate: [ AuthGuardService ]
   },
   {
     path: 'exams',
     component: ExamsComponent,
+    canActivate: [ AuthGuardService ]
   },
   {
     path: 'exams/:id',
     component: ExamDetailComponent,
+    canActivate: [ AuthGuardService ]
   },
   {
     path: 'exam-tasks/:id',
     component: ExamTaskDetailComponent,
+    canActivate: [ AuthGuardService ]
   },
   {
     path: '**',

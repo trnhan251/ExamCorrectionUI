@@ -46,4 +46,8 @@ export class ExamDetailComponent implements OnInit {
   onDeleteExamTask = (e) => {
     const item = Object.assign({}, e.row.data);
   }
+
+  onExamSave(): void {
+    this.examService.updateExam(this.exam).subscribe(res => this.exam = res);
+  }
 }

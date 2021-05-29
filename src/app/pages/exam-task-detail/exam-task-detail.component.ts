@@ -53,6 +53,20 @@ export class ExamTaskDetailComponent implements OnInit {
   }
 
   onStudentSolutionSave(): void {
-    this.studentSolutionService.updateStudentSolution(this.currentStudentSolution).subscribe(res => this.currentStudentSolution = res);
+    this.studentSolutionService.updateStudentSolution(this.currentStudentSolution).subscribe(res => {
+      this.currentStudentSolution = res;
+      this.studentSolutionService.getStudentSolutions(this.examTask.id).subscribe((studentSolutions: StudentSolution[]) => {
+        this.studentSolutions = studentSolutions;
+      });
+    });
+  }
+
+  onScoreStudentSolution(): void {
+    this.studentSolutionService.scoreStudentSolution(this.currentStudentSolution.id).subscribe(res => {
+      this.currentStudentSolution = res;
+      this.studentSolutionService.getStudentSolutions(this.examTask.id).subscribe((studentSolutions: StudentSolution[]) => {
+        this.studentSolutions = studentSolutions;
+      });
+    });
   }
 }

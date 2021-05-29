@@ -25,4 +25,11 @@ export class ExamService {
     };
     return this.http.get(this.api + '/' + id, httpOptions);
   }
+
+  public updateExam(exam): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.put(this.api, exam, httpOptions);
+  }
 }

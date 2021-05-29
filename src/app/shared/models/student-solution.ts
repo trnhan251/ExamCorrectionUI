@@ -3,4 +3,5 @@ export interface StudentSolution {
   taskId?: number;
   studentId?: number;
   answer?: string;
+  score?: number;
 }
