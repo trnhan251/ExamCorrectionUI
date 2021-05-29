@@ -1,4 +1,4 @@
-<h2 class="content-block">Courses</h2>
+<h2 class="content-block">Dataset</h2>
 <dx-data-grid class="dx-card wide-card"
               [dataSource]="dataSource"
               [showBorders]="false"
@@ -20,16 +20,36 @@
     [hidingPriority]="2">
   </dxi-column>
   <dxi-column
-    dataField="name"
+    dataField="sentence1"
     dataType="string"
-    caption="Name"
+    caption="Sentence 1"
+    width="500"
     [hidingPriority]="2">
   </dxi-column>
   <dxi-column
-    dataField="description"
+    dataField="sentence2"
     dataType="string"
-    caption="Description"
-    width="1000"
+    caption="Sentence 2"
+    width="500"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="score"
+    dataType="string"
+    caption="Score"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="isSimilar"
+    dataType="number"
+    caption="Is Similar"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="createdDate"
+    dataType="date"
+    format="dd.MM.yyyy"
+    caption="Created Date"
     [hidingPriority]="2">
   </dxi-column>
   <dxi-column caption="Aktionen" type="buttons">
@@ -37,60 +57,46 @@
   </dxi-column>
 </dx-data-grid>
 <div class="add-button-container">
-  <button mat-fab color="primary" aria-label="Example icon button with a home icon" (click)="onAddCourseClick()">
+  <button mat-fab color="primary" aria-label="Example icon button with a home icon" (click)="onAddButtonClick()">
     <mat-icon>add</mat-icon>
   </button>
 </div>
 
 <dx-popup
   [showTitle]="true"
-  title="New course"
+  title="Data"
   [dragEnabled]="false"
   [closeOnOutsideClick]="false"
-  [(visible)]="addPopupVisible"
-  [width]="500"
-  [height]="500"
+  [(visible)]="datasetPopup"
+  [width]="600"
+  [height]="700"
   (onHiding)="closePopup()"
 >
   <mat-form-field class="field-lg-width" appearance="outline">
-    <mat-label>Name</mat-label>
+    <mat-label>Sentence 1</mat-label>
     <label>
-      <input [(ngModel)]="currentCourse.name"  matInput>
+      <textarea [(ngModel)]="currentData.sentence1" rows="5" matInput></textarea>
     </label>
   </mat-form-field>
   <mat-form-field class="field-lg-width" appearance="outline">
-    <mat-label>Description</mat-label>
+    <mat-label>Sentence 2</mat-label>
     <label>
-      <textarea [(ngModel)]="currentCourse.description" [rows]="10" matInput></textarea>
+      <textarea [(ngModel)]="currentData.sentence2" rows="5" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Score</mat-label>
+    <label>
+      <input [(ngModel)]="currentData.score" matInput>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Is Similar</mat-label>
+    <label>
+      <input [(ngModel)]="currentData.isSimilar" matInput>
     </label>
   </mat-form-field>
   <div class="dataset-actions">
-    <button mat-raised-button color="primary" (click)="onCourseCreate()">Create</button>
-  </div>
-</dx-popup>
-<dx-popup
-  [showTitle]="true"
-  title="Edit course"
-  [dragEnabled]="false"
-  [closeOnOutsideClick]="false"
-  [(visible)]="editPopupVisible"
-  [width]="500"
-  [height]="500"
-  (onHiding)="closePopup()"
->
-  <mat-form-field class="field-lg-width" appearance="outline">
-    <mat-label>Name</mat-label>
-    <label>
-      <input [(ngModel)]="currentCourse.name" matInput>
-    </label>
-  </mat-form-field>
-  <mat-form-field class="field-lg-width" appearance="outline">
-    <mat-label>Description</mat-label>
-    <label>
-      <textarea [(ngModel)]="currentCourse.description" [rows]="10" matInput></textarea>
-    </label>
-  </mat-form-field>
-  <div class="dataset-actions">
-    <button mat-raised-button color="primary" (click)="onCourseSave()">Save</button>
+    <button mat-raised-button color="primary" (click)="onDataSave()">Save</button>
   </div>
 </dx-popup>

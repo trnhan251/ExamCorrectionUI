@@ -19,4 +19,25 @@ export class CourseService {
     };
     return this.http.get(this.api, httpOptions);
   }
+
+  public createCourse(course): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.post(this.api, course, httpOptions);
+  }
+
+  public updateCourse(course): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.put(this.api, course, httpOptions);
+  }
+
+  public deleteCourse(id): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.delete(this.api + '/' + id, httpOptions);
+  }
 }

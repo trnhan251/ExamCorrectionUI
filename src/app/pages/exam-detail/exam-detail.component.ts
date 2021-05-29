@@ -5,6 +5,7 @@ import {ExamService} from '../../shared/services/exam.service';
 import {ExamTask} from '../../shared/models/exam-task';
 import {ExamTaskService} from '../../shared/services/exam-task.service';
 import {environment} from '../../../environments/environment';
+import {AlertifyService} from '../../shared/services/alertify.service';
 
 @Component({
   selector: 'app-exam-detail',
@@ -21,7 +22,7 @@ export class ExamDetailComponent implements OnInit {
   headers = { 'Authorization': 'Bearer ' + localStorage.getItem('token')};
 
   constructor(private route: ActivatedRoute, private examService: ExamService,
-              private examTaskService: ExamTaskService, private router: Router) {
+              private examTaskService: ExamTaskService, private router: Router, private alertify: AlertifyService) {
     this.route.paramMap.subscribe(params => {
       const idParams = params.get('id');
       this.examService.getExam(idParams).subscribe((exam: Exam) => {
@@ -48,6 +49,12 @@ export class ExamDetailComponent implements OnInit {
   }
 
   onExamSave(): void {
-    this.examService.updateExam(this.exam).subscribe(res => this.exam = res);
+    this.examService.updateExam(this.exam).subscribe(
+      res => {
+        this.exam = res;
+        this.alertify.success('Exam is updated');
+      },
+      err => this.alertify.error('Exam cannot be updated')
+    );
   }
 }

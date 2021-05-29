@@ -15,6 +15,11 @@ export const navigation = [
     icon: 'copy'
   },
   {
+    text: 'Dataset',
+    path: '/dataset',
+    icon: 'smalliconslayout'
+  },
+  {
     text: 'Information',
     path: '#',
     icon: 'info'

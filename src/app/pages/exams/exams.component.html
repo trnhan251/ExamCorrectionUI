@@ -55,7 +55,42 @@
   </dxi-column>
 </dx-data-grid>
 <div class="add-button-container">
-  <button mat-fab color="primary" aria-label="Example icon button with a home icon" (click)="onAddCourseClick()">
+  <button mat-fab color="primary" aria-label="Example icon button with a home icon" (click)="onAddButtonClick()">
     <mat-icon>add</mat-icon>
   </button>
 </div>
+
+<dx-popup
+  [showTitle]="true"
+  title="New exam"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="addPopupVisible"
+  [width]="500"
+  [height]="600"
+  (onHiding)="closePopup()"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Course</mat-label>
+    <mat-select [(ngModel)]="currentCourse" (selectionChange)="onChangeCourse($event)">
+      <mat-option *ngFor="let course of courses" [value]="course">
+        {{course.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Name</mat-label>
+    <label>
+      <input [(ngModel)]="currentExam.name"  matInput>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentExam.description" [rows]="10" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <div class="dataset-actions">
+    <button mat-raised-button color="primary" (click)="onAddExam()">Create</button>
+  </div>
+</dx-popup>

@@ -4,20 +4,20 @@
   <mat-form-field class="field-md-width" appearance="outline">
     <mat-label>Exam name</mat-label>
     <label>
-      <input [value]="exam.name" matInput >
+      <input [(ngModel)]="exam.name" matInput >
     </label>
   </mat-form-field>
   <mat-form-field class="field-md-width" appearance="outline">
     <mat-label>Score Threshold</mat-label>
     <label>
-      <input [value]="exam.scoreThreshold" matInput >
+      <input [(ngModel)]="exam.scoreThreshold" matInput >
     </label>
   </mat-form-field>
   <br>
   <mat-form-field class="field-md-width" appearance="outline">
     <mat-label>Description</mat-label>
     <label>
-      <textarea [value]="exam.description" matInput ></textarea>
+      <textarea [(ngModel)]="exam.description" matInput ></textarea>
     </label>
   </mat-form-field>
   <br>

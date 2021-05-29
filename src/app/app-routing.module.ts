@@ -17,6 +17,8 @@ import {ExamsComponent} from './pages/exams/exams.component';
 import {ExamDetailComponent} from './pages/exam-detail/exam-detail.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {ExamTaskDetailComponent} from './pages/exam-task-detail/exam-task-detail.component';
+import {DatasetComponent} from './pages/dataset/dataset.component';
+import {CommonModule} from '@angular/common';
 
 const routes: Routes = [
   {
@@ -54,6 +56,11 @@ const routes: Routes = [
     canActivate: [ AuthGuardService ]
   },
   {
+    path: 'dataset',
+    component: DatasetComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }
@@ -80,6 +87,7 @@ const routes: Routes = [
     MatNativeDateModule,
     DxPopupModule,
     DxFileUploaderModule,
+    CommonModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
@@ -90,7 +98,8 @@ const routes: Routes = [
     CoursesComponent,
     ExamsComponent,
     ExamDetailComponent,
-    ExamTaskDetailComponent
+    ExamTaskDetailComponent,
+    DatasetComponent
   ]
 })
 export class AppRoutingModule { }

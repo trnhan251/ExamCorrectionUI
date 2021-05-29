@@ -26,6 +26,13 @@ export class ExamService {
     return this.http.get(this.api + '/' + id, httpOptions);
   }
 
+  public createExam(exam): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.post(this.api, exam, httpOptions);
+  }
+
   public updateExam(exam): any {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})

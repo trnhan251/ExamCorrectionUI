@@ -31,20 +31,6 @@
   }
 }
 
-mat-form-field.field-sm-width {
-  width: 24%;
-  margin-right: 1%;
-}
-mat-form-field.field-md-width {
-  width: 49%;
-  margin-right: 1%;
-}
-
-mat-form-field.field-lg-width {
-  width: 100%;
-  margin: 0 0;
-}
-
 .dataset-actions {
   width: 100%;
   text-align: center;
@@ -58,6 +44,17 @@ mat-form-field.field-lg-width {
     background-color: rgb(66, 215, 157);
   }
 }
-::ng-deep .cdk-overlay-container {
-  z-index: 2000;
+
+mat-form-field.field-sm-width {
+  width: 24%;
+  margin-right: 1%;
+}
+mat-form-field.field-md-width {
+  width: 49%;
+  margin-right: 1%;
+}
+
+mat-form-field.field-lg-width {
+  width: 100%;
+  margin: 0 0;
 }

@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~11.1.0",
     "@angular/router": "~11.1.0",
     "@azure/msal-angular": "^1.1.2",
+    "alertifyjs": "^1.13.1",
     "devextreme": "^20.2.4",
     "devextreme-angular": "^20.2.4",
     "devextreme-schematics": "^1.2.14",
