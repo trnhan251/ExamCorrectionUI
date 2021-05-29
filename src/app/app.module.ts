@@ -26,6 +26,9 @@ import {CourseService} from './shared/services/course.service';
 import { ExamsComponent } from './pages/exams/exams.component';
 import {ExamService} from './shared/services/exam.service';
 import { ExamDetailComponent } from './pages/exam-detail/exam-detail.component';
+import {ExamTaskService} from './shared/services/exam-task.service';
+import { ExamTaskDetailComponent } from './pages/exam-task-detail/exam-task-detail.component';
+import {StudentSolutionService} from './shared/services/student-solution.service';
 
 // Remove this line to use Angular Universal
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -62,6 +65,8 @@ function MSALAngularConfigFactory(): MsalAngularConfiguration {
     PredictionService,
     CourseService,
     ExamService,
+    ExamTaskService,
+    StudentSolutionService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,

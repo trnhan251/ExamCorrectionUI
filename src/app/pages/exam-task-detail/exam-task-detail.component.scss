@@ -51,13 +51,22 @@
 }
 
 
+mat-form-field.field-sm-width {
+  width: 24%;
+  margin-right: 1%;
+}
 mat-form-field.field-md-width {
   width: 49%;
   margin-right: 1%;
 }
 
+mat-form-field.field-lg-width {
+  width: 100%;
+  margin: 0 0;
+}
+
 ::ng-deep .mat-input-element {
-  caret-color: rgb(66, 215, 157);
+  caret-color:rgb(66, 215, 157);
 }
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
@@ -125,4 +134,8 @@ mat-form-field.field-md-width {
 .dx-datagrid-rowsview .dx-row-focused.dx-data-row > tr > td:not(.dx-focused) {
   background-color: rgb(66, 215, 157);
   color: #fff;
+}
+
+.mat-raised-button.mat-primary {
+  background-color: rgb(66, 215, 157);
 }

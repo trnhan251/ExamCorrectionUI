@@ -32,3 +32,79 @@
     <mat-datepicker [disabled]="false" #picker1></mat-datepicker>
   </mat-form-field>
 </div>
+
+<div class="block-container">
+  <h2 class="container-title">Tasks</h2>
+  <div class="exam-tasks-container">
+    <dx-data-grid class="dx-card wide-card"
+                  [dataSource]="examTasks"
+                  keyExpr="id"
+                  [showBorders]="true"
+                  [focusedRowEnabled]="false"
+                  [columnAutoWidth]="true"
+                  [columnHidingEnabled]="true"
+    >
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+      <dxo-header-filter
+        [visible]="true"></dxo-header-filter>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+      <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [useIcons]="true"></dxo-editing>
+      <dxi-column
+        dataField="taskOrder"
+        [hidingPriority]="2"
+        caption="Order"
+        [allowEditing]="false">
+      </dxi-column>
+      <dxi-column
+        dataField="description"
+        caption="Description"
+        [hidingPriority]="2">
+      </dxi-column>
+      <dxi-column
+        caption="Solution"
+        dataField="solution"
+        width="800"
+        [hidingPriority]="8">
+      </dxi-column>
+      <dxi-column caption="Actions" type="buttons">
+        <dxi-button text="Detail" [onClick]="onDetailExamTask"></dxi-button>
+        <dxi-button text="Delete" [onClick]="onDeleteExamTask"></dxi-button>
+      </dxi-column>
+    </dx-data-grid>
+  </div>
+
+  <div class="widget-container">
+    <dx-file-uploader
+      #fileUploader
+      uploadMethod="POST"
+      [uploadUrl]="uploadExamTasksUrl"
+      [multiple]="true"
+      [allowedFileExtensions]="['.xlsx']"
+      accept="*"
+      [(value)]="examTasksFile"
+      [uploadHeaders]="headers"
+      uploadMode="instantly"
+    ></dx-file-uploader>
+    <p class="hint-paragraph">You can upload a .xlsx file to automatically import the exam tasks</p>
+  </div>
+</div>
+
+<div class="block-container">
+  <h2 class="container-title">Upload Student Solution</h2>
+  <p>You can upload the solutions of each student as a .xlsx file. One file should only contain the answers of one student</p>
+  <div class="widget-container">
+    <dx-file-uploader
+      #fileUploader
+      uploadMethod="POST"
+      [uploadUrl]="uploadStudentSolutionsUrl"
+      [multiple]="true"
+      [allowedFileExtensions]="['.xlsx']"
+      accept="*"
+      [(value)]="studentSolutionsFile"
+      [uploadHeaders]="headers"
+      uploadMode="instantly"
+    ></dx-file-uploader>
+    <p class="hint-paragraph">Allowed format: .xlsx</p>
+  </div>
+</div>

@@ -65,7 +65,8 @@ export class AuthService {
 
     accessTokenSuccessSubscription = this.broadcastService.subscribe('msal:acquireTokenSuccess', (payload) => {
       console.log('access token acquired at: ' + new Date().toString());
-      console.log(payload);
+      console.log(payload.accessToken);
+      localStorage.setItem('token', payload.accessToken);
     });
 
     accessTokenFailureSubscription = this.broadcastService.subscribe('msal:acquireTokenFailure', (payload) => {

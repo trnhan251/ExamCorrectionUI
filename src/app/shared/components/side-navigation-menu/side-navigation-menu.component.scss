@@ -69,7 +69,7 @@
           }
 
           &.dx-state-selected > .dx-treeview-item * {
-            color: rgb(66, 215, 157);
+            color: #227856;
           }
 
           &:not(.dx-state-focused)>.dx-treeview-item.dx-state-hover {
@@ -82,7 +82,7 @@
 
     :host-context(.dx-theme-generic) ::ng-deep.dx-treeview {
       .dx-treeview-node-container .dx-treeview-node.dx-state-selected.dx-state-focused > .dx-treeview-item * {
-        color: #c2dcd6;
+        color: #ffffff;
       }
     }
     // ##

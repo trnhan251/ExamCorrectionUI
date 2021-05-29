@@ -4,7 +4,7 @@ import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
-import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
+import {DxDataGridModule, DxFileUploaderModule, DxFormModule, DxPopupModule} from 'devextreme-angular';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
@@ -16,6 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {ExamsComponent} from './pages/exams/exams.component';
 import {ExamDetailComponent} from './pages/exam-detail/exam-detail.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {ExamTaskDetailComponent} from './pages/exam-task-detail/exam-task-detail.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
     component: ExamDetailComponent,
   },
   {
+    path: 'exam-tasks/:id',
+    component: ExamTaskDetailComponent,
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }
@@ -69,9 +74,19 @@ const routes: Routes = [
     MatOptionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    DxPopupModule,
+    DxFileUploaderModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
-  declarations: [HomeComponent, ProfileComponent, TasksComponent, CoursesComponent, ExamsComponent, ExamDetailComponent]
+  declarations: [
+    HomeComponent,
+    ProfileComponent,
+    TasksComponent,
+    CoursesComponent,
+    ExamsComponent,
+    ExamDetailComponent,
+    ExamTaskDetailComponent
+  ]
 })
 export class AppRoutingModule { }
