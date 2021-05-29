@@ -50,7 +50,6 @@
       .dx-treeview-node {
         &[aria-level='1'] {
           font-weight: bold;
-          border-bottom: 1px solid #ededed;
         }
 
         &[aria-level='2'] .dx-treeview-item-content {
@@ -70,11 +69,11 @@
           }
 
           &.dx-state-selected > .dx-treeview-item * {
-            color: #42d79d;
+            color: rgb(66, 215, 157);
           }
 
           &:not(.dx-state-focused)>.dx-treeview-item.dx-state-hover {
-            background-color: #ededed;
+            background-color: rgb(66, 215, 157);
           }
         }
 

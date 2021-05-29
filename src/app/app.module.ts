@@ -1,70 +1,42 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { SideNavOuterToolbarModule, SideNavInnerToolbarModule, SingleCardModule } from './layouts';
-import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangePasswordFormModule, LoginFormModule } from './shared/components';
-import { AuthService, ScreenService, AppInfoService } from './shared/services';
-import { UnauthenticatedContentModule } from './unauthenticated-content';
-import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AppComponent} from './app.component';
+import {SideNavInnerToolbarModule, SideNavOuterToolbarModule, SingleCardModule} from './layouts';
+import {FooterModule} from './shared/components';
+import {AppInfoService, AuthService, ScreenService} from './shared/services';
+import {UnauthenticatedContentModule} from './unauthenticated-content';
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PredictionService} from './shared/services/prediction.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {
-  MSAL_GUARD_CONFIG, MSAL_INSTANCE,
-  MSAL_INTERCEPTOR_CONFIG, MsalBroadcastService, MsalGuard,
-  MsalGuardConfiguration, MsalInterceptor,
-  MsalInterceptorConfiguration,
-  MsalModule, MsalRedirectComponent, MsalService
-} from '@azure/msal-angular';
-import {BrowserCacheLocation, InteractionType, IPublicClientApplication, PublicClientApplication} from '@azure/msal-browser';
 import {environment} from '../environments/environment';
-import {LogLevel} from 'msal';
+import { Configuration } from 'msal';
+import {
+  MsalModule,
+  MsalInterceptor,
+  MSAL_CONFIG,
+  MSAL_CONFIG_ANGULAR,
+  MsalService,
+  MsalAngularConfiguration
+} from '@azure/msal-angular';
+import { msalConfig, msalAngularConfig } from './app-config';
+import { CoursesComponent } from './pages/courses/courses.component';
+import {CourseService} from './shared/services/course.service';
+import { ExamsComponent } from './pages/exams/exams.component';
+import {ExamService} from './shared/services/exam.service';
+import { ExamDetailComponent } from './pages/exam-detail/exam-detail.component';
 
-const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1; // Remove this line to use Angular Universal
+// Remove this line to use Angular Universal
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
-export function loggerCallback(logLevel: LogLevel, message: string) {
-  console.log(message);
+
+function MSALConfigFactory(): Configuration {
+  return msalConfig;
 }
 
-export function MSALInstanceFactory(): IPublicClientApplication {
-  return new PublicClientApplication({
-    auth: {
-      clientId: environment.clientId,
-      authority: `https://login.microsoftonline.com/${environment.tenantName}.onmicrosoft.com/`,
-      redirectUri: environment.redirectUrl
-    },
-    cache: {
-      cacheLocation: BrowserCacheLocation.LocalStorage,
-      storeAuthStateInCookie: isIE, // set to true for IE 11
-    },
-    system: {
-      loggerOptions: {
-        loggerCallback,
-        logLevel: LogLevel.Info,
-        piiLoggingEnabled: false
-      }
-    }
-  });
-}
-
-export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
-  const protectedResourceMap = new Map<string, Array<string>>();
-  protectedResourceMap.set(`${environment.redirectUrl}weatherforecast`, [`${environment.clientId}/.default`]);
-
-  return {
-    interactionType: InteractionType.Redirect,
-    protectedResourceMap
-  };
-}
-
-export function MSALGuardConfigFactory(): MsalGuardConfiguration {
-  return {
-    interactionType: InteractionType.Redirect,
-    authRequest: {
-      scopes: [`${environment.clientId}/.default`]
-    },
-  };
+function MSALAngularConfigFactory(): MsalAngularConfiguration {
+  return msalAngularConfig;
 }
 
 @NgModule({
@@ -77,10 +49,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     SideNavInnerToolbarModule,
     SingleCardModule,
     FooterModule,
-    ResetPasswordFormModule,
-    CreateAccountFormModule,
-    ChangePasswordFormModule,
-    LoginFormModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -92,30 +60,25 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     ScreenService,
     AppInfoService,
     PredictionService,
+    CourseService,
+    ExamService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
       multi: true
     },
     {
-      provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory
+      provide: MSAL_CONFIG,
+      useFactory: MSALConfigFactory
     },
     {
-      provide: MSAL_GUARD_CONFIG,
-      useFactory: MSALGuardConfigFactory
+      provide: MSAL_CONFIG_ANGULAR,
+      useFactory: MSALAngularConfigFactory
     },
-    {
-      provide: MSAL_INTERCEPTOR_CONFIG,
-      useFactory: MSALInterceptorConfigFactory
-    },
-    MsalService,
-    MsalGuard,
-    MsalBroadcastService
+    MsalService
   ],
   bootstrap: [
     AppComponent,
-    MsalRedirectComponent
   ]
 })
 export class AppModule { }

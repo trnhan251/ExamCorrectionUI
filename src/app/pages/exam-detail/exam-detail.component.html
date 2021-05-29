@@ -1,0 +1,34 @@
+<h2 class="content-block">Exam Detail</h2>
+<div class="block-container">
+  <h2 class="container-title">Basic information</h2>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Exam name</mat-label>
+    <label>
+      <input [value]="exam.name" matInput >
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Score Threshold</mat-label>
+    <label>
+      <input [value]="exam.scoreThreshold" matInput >
+    </label>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <label>
+      <textarea [value]="exam.description" matInput ></textarea>
+    </label>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Date</mat-label>
+    <label>
+      <input matInput
+             [(ngModel)]="exam.date"
+             [matDatepicker]="picker1">
+    </label>
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker [disabled]="false" #picker1></mat-datepicker>
+  </mat-form-field>
+</div>
