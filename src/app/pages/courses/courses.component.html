@@ -1,0 +1,96 @@
+<h2 class="content-block">Courses</h2>
+<dx-data-grid class="dx-card wide-card"
+              [dataSource]="dataSource"
+              [showBorders]="false"
+              [focusedRowEnabled]="true"
+              [columnAutoWidth]="true"
+              [columnHidingEnabled]="true"
+>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+  <dxo-header-filter
+    [visible]="true"></dxo-header-filter>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-editing mode="row" [allowUpdating]="true" [useIcons]="true"></dxo-editing>
+  <dxi-column
+    dataField="id"
+    width="150"
+    dataType="string"
+    caption="ID"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="name"
+    dataType="string"
+    caption="Name"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="description"
+    dataType="string"
+    caption="Description"
+    width="1000"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column caption="Aktionen" type="buttons">
+    <dxi-button text="Edit" [onClick]="onEditClick"></dxi-button>
+  </dxi-column>
+</dx-data-grid>
+<div class="add-button-container">
+  <button mat-fab color="primary" aria-label="Example icon button with a home icon" (click)="onAddCourseClick()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<dx-popup
+  [showTitle]="true"
+  title="New course"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="addPopupVisible"
+  [width]="500"
+  [height]="500"
+  (onHiding)="closePopup()"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Name</mat-label>
+    <label>
+      <input [(ngModel)]="currentCourse.name"  matInput>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentCourse.description" [rows]="10" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <div class="dataset-actions">
+    <button mat-raised-button color="primary" (click)="onCourseCreate()">Create</button>
+  </div>
+</dx-popup>
+<dx-popup
+  [showTitle]="true"
+  title="Edit course"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="editPopupVisible"
+  [width]="500"
+  [height]="500"
+  (onHiding)="closePopup()"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Name</mat-label>
+    <label>
+      <input [(ngModel)]="currentCourse.name" matInput>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentCourse.description" [rows]="10" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <div class="dataset-actions">
+    <button mat-raised-button color="primary" (click)="onCourseSave()">Save</button>
+  </div>
+</dx-popup>

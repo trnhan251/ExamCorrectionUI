@@ -36,14 +36,20 @@ export class HeaderComponent implements OnInit {
     text: 'Logout',
     icon: 'runner',
     onClick: () => {
-      this.authService.logOut();
+      this.authService.logout();
     }
   }];
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    this.authService.getUser().then((e) => this.user = e.data);
+  ngOnInit(): void {
+    this.user = {
+      email: this.authService.getUserName()
+    };
+  }
+
+  onSignIn = () => {
+    const accountInfo = this.authService.login();
   }
 
   toggleMenu = () => {

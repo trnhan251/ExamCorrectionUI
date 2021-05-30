@@ -1,0 +1,96 @@
+<h2 class="content-block">Exams</h2>
+<dx-data-grid class="dx-card wide-card"
+              [dataSource]="dataSource"
+              [showBorders]="false"
+              [focusedRowEnabled]="true"
+              [columnAutoWidth]="true"
+              [columnHidingEnabled]="true"
+>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+  <dxo-header-filter
+    [visible]="true"></dxo-header-filter>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-editing mode="row" [allowUpdating]="true" [useIcons]="true"></dxo-editing>
+  <dxi-column
+    dataField="id"
+    width="150"
+    dataType="string"
+    caption="ID"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="courseName"
+    dataType="string"
+    caption="Course name"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="name"
+    dataType="string"
+    caption="Name"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="description"
+    dataType="string"
+    caption="Description"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="scoreThreshold"
+    dataType="number"
+    caption="Score Threshold"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="date"
+    dataType="date"
+    format="dd.MM.yyyy"
+    caption="Date"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column caption="Aktionen" type="buttons">
+    <dxi-button text="Details" [onClick]="onDetailClick"></dxi-button>
+  </dxi-column>
+</dx-data-grid>
+<div class="add-button-container">
+  <button mat-fab color="primary" aria-label="Example icon button with a home icon" (click)="onAddButtonClick()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<dx-popup
+  [showTitle]="true"
+  title="New exam"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="addPopupVisible"
+  [width]="500"
+  [height]="600"
+  (onHiding)="closePopup()"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Course</mat-label>
+    <mat-select [(ngModel)]="currentCourse" (selectionChange)="onChangeCourse($event)">
+      <mat-option *ngFor="let course of courses" [value]="course">
+        {{course.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Name</mat-label>
+    <label>
+      <input [(ngModel)]="currentExam.name"  matInput>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentExam.description" [rows]="10" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <div class="dataset-actions">
+    <button mat-raised-button color="primary" (click)="onAddExam()">Create</button>
+  </div>
+</dx-popup>

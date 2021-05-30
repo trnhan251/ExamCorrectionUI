@@ -1,0 +1,109 @@
+<h2 class="content-block">Exam Task Detail</h2>
+<div class="block-container">
+  <h2 class="container-title">Basic information</h2>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Task Order</mat-label>
+    <label>
+      <input [(ngModel)]="examTask.taskOrder" matInput >
+    </label>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <label>
+      <textarea [(ngModel)]="examTask.description" matInput ></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Solution</mat-label>
+    <label>
+      <textarea [(ngModel)]="examTask.solution" matInput ></textarea>
+    </label>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onExamTaskSave()">Speichern</button>
+</div>
+
+<div class="block-container">
+  <h2 class="container-title">Student Solutions</h2>
+  <div class="exam-tasks-container">
+    <dx-data-grid class="dx-card wide-card"
+                  [dataSource]="studentSolutions"
+                  keyExpr="id"
+                  [showBorders]="true"
+                  [focusedRowEnabled]="false"
+                  [columnAutoWidth]="true"
+                  [columnHidingEnabled]="true"
+    >
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+      <dxo-header-filter
+        [visible]="true"></dxo-header-filter>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+      <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [useIcons]="true"></dxo-editing>
+      <dxi-column
+        dataField="id"
+        [hidingPriority]="2"
+        caption="ID"
+        width="200"
+        [allowEditing]="false">
+      </dxi-column>
+      <dxi-column
+        dataField="studentId"
+        caption="Student ID"
+        [hidingPriority]="2">
+      </dxi-column>
+      <dxi-column
+        caption="Student Answer"
+        dataField="answer"
+        width="800"
+        [hidingPriority]="8">
+      </dxi-column>
+      <dxi-column
+        caption="Score"
+        dataField="score"
+        type="number"
+        [hidingPriority]="8">
+      </dxi-column>
+      <dxi-column caption="Actions" type="buttons">
+        <dxi-button text="Detail" [onClick]="onDetailStudentSolution"></dxi-button>
+        <dxi-button text="Delete" [onClick]="onDeleteStudentSolution"></dxi-button>
+      </dxi-column>
+    </dx-data-grid>
+  </div>
+</div>
+
+
+<dx-popup
+  [showTitle]="true"
+  title="Student Solution"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="studentSolutionPopup"
+  [width]="600"
+  [height]="700"
+  (onHiding)="closePopup()"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Student ID</mat-label>
+    <label>
+      <input [(ngModel)]="currentStudentSolution.studentId" matInput >
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Score</mat-label>
+    <label>
+      <input [(ngModel)]="currentStudentSolution.score" matInput >
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Answer</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentStudentSolution.answer" [rows]="15" matInput ></textarea>
+    </label>
+  </mat-form-field>
+  <div class="student-solution-actions">
+    <button mat-raised-button color="primary" (click)="onStudentSolutionSave()">Save</button>
+    <button mat-raised-button color="warn" (click)="onScoreStudentSolution()">Score</button>
+    <button mat-raised-button color="accent" (click)="onAddToDataset()">Add to dataset</button>
+  </div>
+</dx-popup>

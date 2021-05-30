@@ -5,13 +5,23 @@ export const navigation = [
     icon: 'home'
   },
   {
-    text: 'Profile',
-    path: '/profile',
-    icon: 'user'
+    text: 'Courses',
+    path: '/courses',
+    icon: 'box'
   },
   {
-    text: 'Tasks',
-    path: '/tasks',
+    text: 'Exams',
+    path: '/exams',
+    icon: 'copy'
+  },
+  {
+    text: 'Dataset',
+    path: '/dataset',
     icon: 'smalliconslayout'
-  }
+  },
+  {
+    text: 'Information',
+    path: '#',
+    icon: 'info'
+  },
 ];

@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginFormComponent, ResetPasswordFormComponent, CreateAccountFormComponent, ChangePasswordFormComponent } from './shared/components';
 import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
-import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatOptionModule} from "@angular/material/core";
-import {MatInputModule} from "@angular/material/input";
-import {MatSelectModule} from "@angular/material/select";
-import {MatButtonModule} from "@angular/material/button";
-import {FormsModule} from "@angular/forms";
+import {DxDataGridModule, DxFileUploaderModule, DxFormModule, DxPopupModule} from 'devextreme-angular';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import {CoursesComponent} from './pages/courses/courses.component';
+import {MatIconModule} from '@angular/material/icon';
+import {ExamsComponent} from './pages/exams/exams.component';
+import {ExamDetailComponent} from './pages/exam-detail/exam-detail.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {ExamTaskDetailComponent} from './pages/exam-task-detail/exam-task-detail.component';
+import {DatasetComponent} from './pages/dataset/dataset.component';
+import {CommonModule} from '@angular/common';
 
 const routes: Routes = [
   {
@@ -27,26 +34,30 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'courses',
+    component: CoursesComponent,
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'login-form',
-    component: LoginFormComponent,
+    path: 'exams',
+    component: ExamsComponent,
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'reset-password',
-    component: ResetPasswordFormComponent,
+    path: 'exams/:id',
+    component: ExamDetailComponent,
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'create-account',
-    component: CreateAccountFormComponent,
+    path: 'exam-tasks/:id',
+    component: ExamTaskDetailComponent,
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'change-password/:recoveryCode',
-    component: ChangePasswordFormComponent,
+    path: 'dataset',
+    component: DatasetComponent,
     canActivate: [ AuthGuardService ]
   },
   {
@@ -65,10 +76,30 @@ const routes: Routes = [
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
+    DxDataGridModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    DxPopupModule,
+    DxFileUploaderModule,
+    CommonModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
-  declarations: [HomeComponent, ProfileComponent, TasksComponent]
+  declarations: [
+    HomeComponent,
+    ProfileComponent,
+    TasksComponent,
+    CoursesComponent,
+    ExamsComponent,
+    ExamDetailComponent,
+    ExamTaskDetailComponent,
+    DatasetComponent
+  ]
 })
 export class AppRoutingModule { }

@@ -1,0 +1,171 @@
+<h2 class="content-block">Dataset</h2>
+<dx-data-grid class="dx-card wide-card"
+              [dataSource]="dataSource"
+              [showBorders]="false"
+              [focusedRowEnabled]="true"
+              [columnAutoWidth]="true"
+              [columnHidingEnabled]="true"
+>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+  <dxo-header-filter
+    [visible]="true"></dxo-header-filter>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-editing mode="row" [allowUpdating]="true" [useIcons]="true"></dxo-editing>
+  <dxi-column
+    dataField="id"
+    width="150"
+    dataType="string"
+    caption="ID"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="sentence1"
+    dataType="string"
+    caption="Sentence 1"
+    width="500"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="sentence2"
+    dataType="string"
+    caption="Sentence 2"
+    width="500"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="score"
+    dataType="string"
+    caption="Score"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="isSimilar"
+    dataType="number"
+    caption="Is Similar"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column
+    dataField="createdDate"
+    dataType="date"
+    format="dd.MM.yyyy"
+    caption="Created Date"
+    [hidingPriority]="2">
+  </dxi-column>
+  <dxi-column caption="Aktionen" type="buttons">
+    <dxi-button text="Details" [onClick]="onDetailClick"></dxi-button>
+  </dxi-column>
+</dx-data-grid>
+<div class="add-button-container">
+  <button mat-fab color="primary" aria-label="Example icon button with a home icon" (click)="onAddButtonClick()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<dx-popup
+  [showTitle]="true"
+  title="New Data"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="addPopup"
+  [width]="600"
+  [height]="800"
+  (onHiding)="closePopup()"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Sentence 1</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentData.sentence1" rows="5" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Sentence 2</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentData.sentence2" rows="5" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Score</mat-label>
+    <label>
+      <input [(ngModel)]="currentData.score" matInput>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Is Similar</mat-label>
+    <label>
+      <input [(ngModel)]="currentData.isSimilar" matInput>
+    </label>
+  </mat-form-field>
+  <div class="widget-container">
+    <button mat-icon-button color="accent" (click)="onNewDataExample()" aria-label="Example icon button with a menu icon">
+      <mat-icon>report</mat-icon>
+    </button>
+    <dx-file-uploader
+      #fileUploader
+      uploadMethod="POST"
+      [uploadUrl]="uploadDatasetUrl"
+      [multiple]="true"
+      [allowedFileExtensions]="['.xlsx']"
+      accept="*"
+      [(value)]="datasetFile"
+      [uploadHeaders]="headers"
+      uploadMode="instantly"
+    ></dx-file-uploader>
+    <p class="hint-paragraph">You can upload a .xlsx file to automatically import the dataset</p>
+  </div>
+  <div class="dataset-actions">
+    <button mat-raised-button color="primary" (click)="onDataCreate()">Create</button>
+  </div>
+</dx-popup>
+
+
+<dx-popup
+  [showTitle]="true"
+  title="Edit Data"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="datasetPopup"
+  [width]="600"
+  [height]="700"
+  (onHiding)="closePopup()"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Sentence 1</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentData.sentence1" rows="5" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Sentence 2</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentData.sentence2" rows="5" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Score</mat-label>
+    <label>
+      <input [(ngModel)]="currentData.score" matInput>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Is Similar</mat-label>
+    <label>
+      <input [(ngModel)]="currentData.isSimilar" matInput>
+    </label>
+  </mat-form-field>
+  <div class="dataset-actions">
+    <button mat-raised-button color="primary" (click)="onDataSave()">Save</button>
+  </div>
+</dx-popup>
+
+<dx-popup
+  [showTitle]="true"
+  title="Example for new data"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="newDataExamplePopup"
+  [width]="1200"
+  [height]="250"
+>
+  <img src="./assets/img/Example3.PNG" alt="New data excel file example">
+</dx-popup>

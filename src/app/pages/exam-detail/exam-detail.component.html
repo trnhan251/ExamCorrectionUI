@@ -1,0 +1,142 @@
+<h2 class="content-block">Exam Detail</h2>
+<div class="block-container">
+  <h2 class="container-title">Basic information</h2>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Exam name</mat-label>
+    <label>
+      <input [(ngModel)]="exam.name" matInput >
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Score Threshold</mat-label>
+    <label>
+      <input [(ngModel)]="exam.scoreThreshold" matInput >
+    </label>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <label>
+      <textarea [(ngModel)]="exam.description" matInput ></textarea>
+    </label>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="field-md-width" appearance="outline">
+    <mat-label>Date</mat-label>
+    <label>
+      <input matInput
+             [(ngModel)]="exam.date"
+             [matDatepicker]="picker1">
+    </label>
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker [disabled]="false" #picker1></mat-datepicker>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color="primary" (click)="onExamSave()">Speichern</button>
+</div>
+
+<div class="block-container">
+  <h2 class="container-title">Tasks</h2>
+  <div class="exam-tasks-container">
+    <dx-data-grid class="dx-card wide-card"
+                  [dataSource]="examTasks"
+                  keyExpr="id"
+                  [showBorders]="true"
+                  [focusedRowEnabled]="false"
+                  [columnAutoWidth]="true"
+                  [columnHidingEnabled]="true"
+    >
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+      <dxo-header-filter
+        [visible]="true"></dxo-header-filter>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+      <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [useIcons]="true"></dxo-editing>
+      <dxi-column
+        dataField="taskOrder"
+        [hidingPriority]="2"
+        caption="Order"
+        [allowEditing]="false">
+      </dxi-column>
+      <dxi-column
+        dataField="description"
+        caption="Description"
+        [hidingPriority]="2">
+      </dxi-column>
+      <dxi-column
+        caption="Solution"
+        dataField="solution"
+        width="800"
+        [hidingPriority]="8">
+      </dxi-column>
+      <dxi-column caption="Actions" type="buttons">
+        <dxi-button text="Detail" [onClick]="onDetailExamTask"></dxi-button>
+        <dxi-button text="Delete" [onClick]="onDeleteExamTask"></dxi-button>
+      </dxi-column>
+    </dx-data-grid>
+  </div>
+
+  <div class="widget-container">
+    <button mat-icon-button color="accent" (click)="onShowExamTaskExample()" aria-label="Example icon button with a menu icon">
+      <mat-icon>report</mat-icon>
+    </button>
+    <dx-file-uploader
+      #fileUploader
+      uploadMethod="POST"
+      [uploadUrl]="uploadExamTasksUrl"
+      [multiple]="true"
+      [allowedFileExtensions]="['.xlsx']"
+      accept="*"
+      [(value)]="examTasksFile"
+      [uploadHeaders]="headers"
+      uploadMode="instantly"
+    ></dx-file-uploader>
+    <p class="hint-paragraph">You can upload a .xlsx file to automatically import the exam tasks</p>
+  </div>
+</div>
+
+<dx-popup
+  [showTitle]="true"
+  title="Example for exam task excel file"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="examTaskExamplePopup"
+  [width]="1000"
+  [height]="250"
+>
+  <img src="./assets/img/Example1.PNG" alt="Exam task excel file example">
+</dx-popup>
+
+<div class="block-container">
+  <h2 class="container-title">Upload Student Solution</h2>
+  <p>You can upload the solutions of each student as a .xlsx file. One file should only contain the answers of one student</p>
+  <div class="widget-container">
+    <button mat-icon-button color="accent" (click)="onShowStudentSolutionExample()" aria-label="Example icon button with a menu icon">
+      <mat-icon>report</mat-icon>
+    </button>
+    <dx-file-uploader
+      #fileUploader
+      uploadMethod="POST"
+      [uploadUrl]="uploadStudentSolutionsUrl"
+      [multiple]="true"
+      [allowedFileExtensions]="['.xlsx']"
+      accept="*"
+      [(value)]="studentSolutionsFile"
+      [uploadHeaders]="headers"
+      uploadMode="instantly"
+    ></dx-file-uploader>
+    <p class="hint-paragraph">Allowed format: .xlsx</p>
+  </div>
+</div>
+
+<dx-popup
+  [showTitle]="true"
+  title="Example for student solution excel file"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="studentSolutionExamplePopup"
+  [width]="500"
+  [height]="200"
+>
+  <img src="./assets/img/Example2.PNG" alt="Student solution excel file example">
+</dx-popup>

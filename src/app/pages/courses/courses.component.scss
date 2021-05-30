@@ -1,0 +1,60 @@
+::ng-deep .dx-datagrid .dx-link {
+  color: rgb(66, 215, 157);
+}
+
+::ng-deep h2.content-block {
+  margin: 20px 40px;
+}
+
+::ng-deep .dx-datagrid-rowsview .dx-row-focused.dx-data-row > td:not(.dx-focused) {
+  background-color: rgb(66, 215, 157);
+}
+
+::ng-deep .dx-datagrid-rowsview .dx-row-focused.dx-data-row > td,
+.dx-datagrid-rowsview .dx-row-focused.dx-data-row > tr:last-child > td {
+  border-bottom: 1px solid rgb(66, 215, 157);
+}
+
+::ng-deep .dx-datagrid-rowsview .dx-row-focused.dx-data-row .dx-command-edit .dx-link,
+.dx-datagrid-rowsview .dx-row-focused.dx-data-row > td:not(.dx-focused),
+.dx-datagrid-rowsview .dx-row-focused.dx-data-row > tr > td:not(.dx-focused) {
+  background-color: rgb(66, 215, 157);
+  color: #fff;
+}
+
+.add-button-container {
+  text-align: center;
+  padding: 20px 0;
+
+  .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+    background-color: rgb(66, 215, 157);
+  }
+}
+
+mat-form-field.field-sm-width {
+  width: 24%;
+  margin-right: 1%;
+}
+mat-form-field.field-md-width {
+  width: 49%;
+  margin-right: 1%;
+}
+
+mat-form-field.field-lg-width {
+  width: 100%;
+  margin: 0 0;
+}
+
+.dataset-actions {
+  width: 100%;
+  text-align: center;
+
+  .mat-raised-button {
+    width: 150px;
+    margin: 0 10px;
+  }
+
+  .mat-raised-button.mat-primary {
+    background-color: rgb(66, 215, 157);
+  }
+}
