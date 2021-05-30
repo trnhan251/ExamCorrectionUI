@@ -11,7 +11,7 @@ export class PredictionService {
   constructor(private http: HttpClient) {
   }
 
-  public createPrediction(predictionRequest: PredictionRequest) {
+  public createPrediction(predictionRequest: PredictionRequest): any {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };

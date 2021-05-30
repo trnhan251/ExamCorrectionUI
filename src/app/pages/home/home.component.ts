@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {apiConfig} from '../../app-config';
 import {Subscription} from 'rxjs';
 import {BroadcastService} from '@azure/msal-angular';
+import {AlertifyService} from '../../shared/services/alertify.service';
 
 @Component({
   templateUrl: 'home.component.html',
@@ -13,23 +14,24 @@ import {BroadcastService} from '@azure/msal-angular';
 })
 
 export class HomeComponent implements OnInit{
-  predictionRequest: PredictionRequest = {firstSentence: 'Test is done', secondSentence: 'Test isn\'t done'};
+  predictionRequest: PredictionRequest = {sentence1: 'Test is done', sentence2: 'Test isn\'t done'};
   predictionResult: PredictionResult = {correctnessPercentage: 0.0};
-
-  constructor(private predictionService: PredictionService, private authService: AuthService,
-              private http: HttpClient, private broadcastService: BroadcastService) {}
+  result = 0.0;
+  constructor(private predictionService: PredictionService, private alertfiy: AlertifyService) {}
 
   createPredictionEvent(): void {
     this.predictionService.createPrediction(this.predictionRequest).subscribe(
-      res => this.predictionResult = res,
-      err => console.log(err)
+      res => {
+        this.result = res;
+        this.alertfiy.success('Scored');
+      },
+      err => {
+        console.log(err);
+        this.alertfiy.error('Error or you did not login');
+      }
     );
   }
 
-  getProfile(): void {
-  }
-
   ngOnInit(): void {
-    this.getProfile();
   }
 }

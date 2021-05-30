@@ -1,6 +1,6 @@
 export interface PredictionRequest {
-  firstSentence?: string;
-  secondSentence?: string;
+  sentence1?: string;
+  sentence2?: string;
 }
 
 export interface PredictionResult {
