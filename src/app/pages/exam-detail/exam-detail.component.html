@@ -77,6 +77,9 @@
   </div>
 
   <div class="widget-container">
+    <button mat-icon-button color="accent" (click)="onShowExamTaskExample()" aria-label="Example icon button with a menu icon">
+      <mat-icon>report</mat-icon>
+    </button>
     <dx-file-uploader
       #fileUploader
       uploadMethod="POST"
@@ -92,10 +95,25 @@
   </div>
 </div>
 
+<dx-popup
+  [showTitle]="true"
+  title="Example for exam task excel file"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="examTaskExamplePopup"
+  [width]="1000"
+  [height]="250"
+>
+  <img src="./assets/img/Example1.PNG" alt="Exam task excel file example">
+</dx-popup>
+
 <div class="block-container">
   <h2 class="container-title">Upload Student Solution</h2>
   <p>You can upload the solutions of each student as a .xlsx file. One file should only contain the answers of one student</p>
   <div class="widget-container">
+    <button mat-icon-button color="accent" (click)="onShowStudentSolutionExample()" aria-label="Example icon button with a menu icon">
+      <mat-icon>report</mat-icon>
+    </button>
     <dx-file-uploader
       #fileUploader
       uploadMethod="POST"
@@ -110,3 +128,15 @@
     <p class="hint-paragraph">Allowed format: .xlsx</p>
   </div>
 </div>
+
+<dx-popup
+  [showTitle]="true"
+  title="Example for student solution excel file"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="studentSolutionExamplePopup"
+  [width]="500"
+  [height]="200"
+>
+  <img src="./assets/img/Example2.PNG" alt="Student solution excel file example">
+</dx-popup>

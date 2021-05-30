@@ -18,4 +18,25 @@ export class DatasetService {
     };
     return this.http.get(this.api, httpOptions);
   }
+
+  public createData(data): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.post(this.api, data, httpOptions);
+  }
+
+  public updateData(data): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.put(this.api, data, httpOptions);
+  }
+
+  public deleteData(id): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.delete(this.api + '/' + id, httpOptions);
+  }
 }

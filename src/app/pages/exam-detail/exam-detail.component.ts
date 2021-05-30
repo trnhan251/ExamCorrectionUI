@@ -20,6 +20,8 @@ export class ExamDetailComponent implements OnInit {
   uploadStudentSolutionsUrl = environment.backendApi + 'StudentSolutions/Excel';
   studentSolutionsFile: any[] = [];
   headers = { 'Authorization': 'Bearer ' + localStorage.getItem('token')};
+  examTaskExamplePopup = false;
+  studentSolutionExamplePopup = false;
 
   constructor(private route: ActivatedRoute, private examService: ExamService,
               private examTaskService: ExamTaskService, private router: Router, private alertify: AlertifyService) {
@@ -56,5 +58,13 @@ export class ExamDetailComponent implements OnInit {
       },
       err => this.alertify.error('Exam cannot be updated')
     );
+  }
+
+  onShowExamTaskExample(): void {
+    this.examTaskExamplePopup = true;
+  }
+
+  onShowStudentSolutionExample(): void {
+    this.studentSolutionExamplePopup = true;
   }
 }

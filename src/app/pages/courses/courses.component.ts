@@ -47,7 +47,7 @@ export class CoursesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDetailClick = (e) => {
+  onEditClick = (e) => {
     this.currentCourse = Object.assign({}, e.row.data);
     this.editPopupVisible = true;
   }

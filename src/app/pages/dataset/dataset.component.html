@@ -64,7 +64,64 @@
 
 <dx-popup
   [showTitle]="true"
-  title="Data"
+  title="New Data"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="addPopup"
+  [width]="600"
+  [height]="800"
+  (onHiding)="closePopup()"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Sentence 1</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentData.sentence1" rows="5" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Sentence 2</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentData.sentence2" rows="5" matInput></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Score</mat-label>
+    <label>
+      <input [(ngModel)]="currentData.score" matInput>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Is Similar</mat-label>
+    <label>
+      <input [(ngModel)]="currentData.isSimilar" matInput>
+    </label>
+  </mat-form-field>
+  <div class="widget-container">
+    <button mat-icon-button color="accent" (click)="onNewDataExample()" aria-label="Example icon button with a menu icon">
+      <mat-icon>report</mat-icon>
+    </button>
+    <dx-file-uploader
+      #fileUploader
+      uploadMethod="POST"
+      [uploadUrl]="uploadDatasetUrl"
+      [multiple]="true"
+      [allowedFileExtensions]="['.xlsx']"
+      accept="*"
+      [(value)]="datasetFile"
+      [uploadHeaders]="headers"
+      uploadMode="instantly"
+    ></dx-file-uploader>
+    <p class="hint-paragraph">You can upload a .xlsx file to automatically import the dataset</p>
+  </div>
+  <div class="dataset-actions">
+    <button mat-raised-button color="primary" (click)="onDataCreate()">Create</button>
+  </div>
+</dx-popup>
+
+
+<dx-popup
+  [showTitle]="true"
+  title="Edit Data"
   [dragEnabled]="false"
   [closeOnOutsideClick]="false"
   [(visible)]="datasetPopup"
@@ -99,4 +156,16 @@
   <div class="dataset-actions">
     <button mat-raised-button color="primary" (click)="onDataSave()">Save</button>
   </div>
+</dx-popup>
+
+<dx-popup
+  [showTitle]="true"
+  title="Example for new data"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="newDataExamplePopup"
+  [width]="1200"
+  [height]="250"
+>
+  <img src="./assets/img/Example3.PNG" alt="New data excel file example">
 </dx-popup>
