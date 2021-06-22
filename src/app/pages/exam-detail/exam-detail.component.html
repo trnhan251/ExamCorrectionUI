@@ -75,11 +75,14 @@
       </dxi-column>
     </dx-data-grid>
   </div>
-
+  <button mat-icon-button color="accent" (click)="onShowExamTaskExample()" aria-label="Example icon button with a menu icon">
+    <mat-icon>report</mat-icon>
+  </button>
+  <button mat-icon-button color="accent" (click)="onAddExamTask()" aria-label="Example icon button with a menu icon">
+    <mat-icon>add</mat-icon>
+  </button>
   <div class="widget-container">
-    <button mat-icon-button color="accent" (click)="onShowExamTaskExample()" aria-label="Example icon button with a menu icon">
-      <mat-icon>report</mat-icon>
-    </button>
+
     <dx-file-uploader
       #fileUploader
       uploadMethod="POST"
@@ -139,4 +142,37 @@
   [height]="200"
 >
   <img src="./assets/img/Example2.PNG" alt="Student solution excel file example">
+</dx-popup>
+
+
+<dx-popup
+  [showTitle]="true"
+  title="New exam task"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="newExamTaskPopup"
+  [width]="700"
+  [height]="700"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Task order</mat-label>
+    <label>
+      <input [(ngModel)]="currentExamTask.taskOrder" matInput >
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentExamTask.description" rows="5" matInput ></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Solution</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentExamTask.solution" rows="10" matInput ></textarea>
+    </label>
+  </mat-form-field>
+  <div class="exam-task-actions">
+    <button mat-raised-button color="primary" (click)="onNewExamTask()">Create</button>
+  </div>
 </dx-popup>

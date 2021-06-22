@@ -18,6 +18,7 @@ export class ExamTaskDetailComponent implements OnInit {
   studentSolutions: StudentSolution[];
   studentSolutionPopup = false;
   currentStudentSolution: StudentSolution = {};
+  newStudentSolution = false;
 
   constructor(private route: ActivatedRoute, private examTaskService: ExamTaskService,
               private studentSolutionService: StudentSolutionService, private alertify: AlertifyService) {
@@ -26,9 +27,13 @@ export class ExamTaskDetailComponent implements OnInit {
       this.examTaskService.getExamTask(idParams).subscribe((examTask: ExamTask) => {
         this.examTask = examTask;
       });
-      this.studentSolutionService.getStudentSolutions(idParams).subscribe((studentSolutions: StudentSolution[]) => {
-        this.studentSolutions = studentSolutions;
-      });
+      this.getListStudentSolutions(idParams);
+    });
+  }
+
+  private getListStudentSolutions(idParams: string): void {
+    this.studentSolutionService.getStudentSolutions(idParams).subscribe((studentSolutions: StudentSolution[]) => {
+      this.studentSolutions = studentSolutions;
     });
   }
 
@@ -42,7 +47,15 @@ export class ExamTaskDetailComponent implements OnInit {
   }
 
   onDeleteStudentSolution = (e) => {
-    const item = Object.assign({}, e.row.data);
+    this.currentStudentSolution = Object.assign({}, e.row.data);
+    this.studentSolutionService.deleteStudentSolution(this.currentStudentSolution.id).subscribe(
+      res => {
+        this.currentStudentSolution = {};
+        this.alertify.success('Student solution was deleted');
+        this.getListStudentSolutions(this.examTask.id + '');
+      },
+      err => this.alertify.error('Student solution cannot be deleted')
+    );
   }
 
   closePopup(): void {
@@ -54,6 +67,7 @@ export class ExamTaskDetailComponent implements OnInit {
       res => {
         this.examTask = res;
         this.alertify.success('Exam task was updated');
+        this.getListStudentSolutions(this.examTask.id + '');
       },
       err => this.alertify.error('Exam task cannot be updated')
     );
@@ -63,9 +77,7 @@ export class ExamTaskDetailComponent implements OnInit {
     this.studentSolutionService.updateStudentSolution(this.currentStudentSolution).subscribe(res => {
       this.currentStudentSolution = res;
       this.alertify.success('Student solution was updated');
-      this.studentSolutionService.getStudentSolutions(this.examTask.id).subscribe((studentSolutions: StudentSolution[]) => {
-        this.studentSolutions = studentSolutions;
-      });
+      this.getListStudentSolutions(this.examTask.id + '');
     }, err => this.alertify.error('Student solution cannot be updated'));
   }
 
@@ -73,9 +85,7 @@ export class ExamTaskDetailComponent implements OnInit {
     this.studentSolutionService.scoreStudentSolution(this.currentStudentSolution.id).subscribe(res => {
       this.currentStudentSolution = res;
       this.alertify.success('Student solution was scored');
-      this.studentSolutionService.getStudentSolutions(this.examTask.id).subscribe((studentSolutions: StudentSolution[]) => {
-        this.studentSolutions = studentSolutions;
-      });
+      this.getListStudentSolutions(this.examTask.id + '');
     }, err => this.alertify.error('Student solution cannot be scored'));
   }
 
@@ -83,5 +93,21 @@ export class ExamTaskDetailComponent implements OnInit {
     this.studentSolutionService.addIntoDataset(this.currentStudentSolution.id).subscribe(res => {
       this.alertify.success('Data was added to dataset');
     }, err => this.alertify.error('Cannot be added to dataset'));
+  }
+
+  onAddStudentSolution(): void {
+    this.newStudentSolution = true;
+    this.currentStudentSolution = { taskId: this.examTask.id };
+  }
+
+  onCreateStudentSolution(): void {
+    this.studentSolutionService.createStudentSolution(this.currentStudentSolution).subscribe(
+      res => {
+        this.currentStudentSolution = {};
+        this.alertify.success('New student solution was created');
+        this.getListStudentSolutions(this.examTask.id + '');
+      },
+      err => this.alertify.error('Cannot create a new student solution')
+    );
   }
 }

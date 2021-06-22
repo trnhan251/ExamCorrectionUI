@@ -70,6 +70,9 @@
       </dxi-column>
     </dx-data-grid>
   </div>
+  <button mat-icon-button color="accent" (click)="onAddStudentSolution()" aria-label="Example icon button with a menu icon">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>
 
 
@@ -105,5 +108,38 @@
     <button mat-raised-button color="primary" (click)="onStudentSolutionSave()">Save</button>
     <button mat-raised-button color="warn" (click)="onScoreStudentSolution()">Score</button>
     <button mat-raised-button color="accent" (click)="onAddToDataset()">Add to dataset</button>
+  </div>
+</dx-popup>
+
+<dx-popup
+  [showTitle]="true"
+  title="New student solution"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="newStudentSolution"
+  [width]="600"
+  [height]="700"
+  (onHiding)="closePopup()"
+>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Student ID</mat-label>
+    <label>
+      <input [(ngModel)]="currentStudentSolution.studentId" matInput >
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Score</mat-label>
+    <label>
+      <input [(ngModel)]="currentStudentSolution.score" matInput >
+    </label>
+  </mat-form-field>
+  <mat-form-field class="field-lg-width" appearance="outline">
+    <mat-label>Answer</mat-label>
+    <label>
+      <textarea [(ngModel)]="currentStudentSolution.answer" [rows]="15" matInput ></textarea>
+    </label>
+  </mat-form-field>
+  <div class="student-solution-actions">
+    <button mat-raised-button color="primary" (click)="onCreateStudentSolution()">Create</button>
   </div>
 </dx-popup>

@@ -26,10 +26,24 @@ export class ExamTaskService {
     return this.http.get(this.api + '/' + id, httpOptions);
   }
 
+  public createExamTask(examTask): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.post(this.api, examTask, httpOptions);
+  }
+
   public updateExamTask(examTask): any {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
     return this.http.put(this.api, examTask, httpOptions);
+  }
+
+  public deleteExamTask(id): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.delete(this.api + '/' + id, httpOptions);
   }
 }
