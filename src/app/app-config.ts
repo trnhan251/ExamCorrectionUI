@@ -46,7 +46,7 @@ export const b2cPolicies = {
  */
 export const apiConfig: {b2cScopes: string[]; webApi: string} = {
     b2cScopes: ['https://nhanvuorg.onmicrosoft.com/exam-api/blob.read'],
-    webApi: 'https://localhost:5001/api/'
+    webApi: 'http://localhost:5001/api/'
 };
 // #endregion
 
