@@ -5,13 +5,13 @@
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>First sentence</mat-label>
-        <textarea [(ngModel)]="predictionRequest.firstSentence" matInput></textarea>
+        <textarea [(ngModel)]="predictionRequest.sentence1" matInput></textarea>
         <mat-hint>Hint</mat-hint>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Second sentence</mat-label>
-        <textarea [(ngModel)]="predictionRequest.secondSentence" matInput></textarea>
+        <textarea [(ngModel)]="predictionRequest.sentence2" matInput></textarea>
         <mat-hint>Hint</mat-hint>
       </mat-form-field>
     </div>
@@ -23,6 +23,6 @@
 <div class="content-block">
   <div class="dx-card responsive-paddings">
     <h2>Result</h2>
-    <h1>Correctness: <span>{{predictionResult.correctnessPercentage * 100}}%</span></h1>
+    <h1>Correctness: <span>{{predictionResult}}%</span></h1>
   </div>
 </div>

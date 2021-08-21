@@ -13,8 +13,8 @@ import {BroadcastService} from '@azure/msal-angular';
 })
 
 export class HomeComponent implements OnInit{
-  predictionRequest: PredictionRequest = {firstSentence: 'Test is done', secondSentence: 'Test isn\'t done'};
-  predictionResult: PredictionResult = {correctnessPercentage: 0.0};
+  predictionRequest: PredictionRequest = {sentence1: 'Test is done', sentence2: 'Test isn\'t done'};
+  predictionResult: any = 0.0;
 
   constructor(private predictionService: PredictionService, private authService: AuthService,
               private http: HttpClient, private broadcastService: BroadcastService) {}
