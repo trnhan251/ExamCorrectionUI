@@ -30,6 +30,13 @@ export class StudentSolutionService {
     return this.http.put(this.api, studentSolution, httpOptions);
   }
 
+  public deleteStudentSolution(id): any {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.delete(this.api + '/' + id, httpOptions);
+  }
+
   public scoreStudentSolution(id): any {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})

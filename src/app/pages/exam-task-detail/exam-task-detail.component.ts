@@ -43,6 +43,13 @@ export class ExamTaskDetailComponent implements OnInit {
 
   onDeleteStudentSolution = (e) => {
     const item = Object.assign({}, e.row.data);
+    this.studentSolutionService.deleteStudentSolution(item.id).subscribe(
+      res => {
+        this.examTask = res;
+        this.alertify.success('Student solution was deleted');
+      },
+      err => this.alertify.error('Student solution cannot be deleted')
+    );
   }
 
   closePopup(): void {
